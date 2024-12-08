@@ -1,4 +1,4 @@
-import numpy as np
+from numpy import base_repr
 
 USE_TEST_INPUT = False
 
@@ -21,7 +21,7 @@ def solution(part):
         for setter in range(base**(len(numbers)-1)):
             result = numbers[0]
 
-            for i, value in enumerate(np.base_repr(setter, base=base).zfill(len(numbers)-1)):
+            for i, value in enumerate(base_repr(setter, base=base).zfill(len(numbers)-1)):
                 if value == "0":
                     result += numbers[i + 1]
                 elif value == "1":
