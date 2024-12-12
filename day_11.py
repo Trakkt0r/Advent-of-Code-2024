@@ -12,7 +12,7 @@ with open(__file__.rsplit("\\", 1)[0] + _file_name, "r") as file:
 
 
 @cache
-def apply_rules(rock, blink_limit, blink=0):
+def apply_rules(rock, blink_limit, blink):
     if blink == blink_limit:
         return 1
     if rock == 0:
@@ -27,7 +27,7 @@ def apply_rules(rock, blink_limit, blink=0):
 def run(blink_limit):
     answer = 0
     for rock in start_rocks:
-        answer += apply_rules(rock, blink_limit)
+        answer += apply_rules(rock, blink_limit, 0)
 
     return answer
 
