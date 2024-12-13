@@ -38,7 +38,7 @@ def solve_equation(coefficient_matrix, constant_matrix):
     return 0
 
 
-def run(processed_input=processed_input_2):
+def run(processed_input):
     answer = 0
     for line in processed_input:
         A_x, A_y, B_x, B_y, P_x, P_y = line
@@ -48,7 +48,5 @@ def run(processed_input=processed_input_2):
     return answer
 
 
-def div(a=50445156, b=28451):
-    return a/b
-
-print(timeit(div, number=10**6))
+print(run(processed_input_1))
+print(run(processed_input_2))
