@@ -1,6 +1,5 @@
 import numpy as np
 import re
-from timeit import timeit
 
 USE_TEST_INPUT = False
 
