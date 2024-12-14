@@ -28,7 +28,7 @@ with open(__file__.rsplit("\\", 1)[0] + _file_name, "r") as file:
 # Uses solving systems of linear equations via matrices
 # Puzzle input always has a non-zero determinant -> there's always 1 solution
 def solve_equation(coefficient_matrix, constant_matrix):
-    solution = np.linalg.inv(coefficient_matrix) @ constant_matrix
+    solution = np.linalg.inv(coefficient_matrix) @ constant_matrix        # @ = matrix multiplication
 
     A, B = solution.item(0), solution.item(1)
 
