@@ -10,24 +10,25 @@ _file_name = f"\\test_input_{_day}.txt" if USE_TEST_INPUT else f"\\input_{_day}.
 
 def part_two_processor(equation):
     result = 6*[None]                   # Pre-allocates the size to 6
-    for i, value in enumerate(re.findall(r"[+=](\d+)", equation)):
+
+    for i, value in enumerate(re.findall(r"(\d+)", equation)):
         if i < 4:
             result[i] = int(value)
         else:
             result[i] = 10000000000000 + int(value)
-    return result
+    return tuple(result)
 
 
 with open(__file__.rsplit("\\", 1)[0] + _file_name, "r") as file:
     raw_input = tuple(equation for equation in file.read().split("\n\n"))
-    processed_input_1 = tuple(tuple(map(int, re.findall(r"[+=](\d+)", equation))) for equation in raw_input)
-    processed_input_2 = tuple(tuple(map(part_two_processor, raw_input)))
+    processed_input_1 = tuple(tuple(map(int, re.findall(r"(\d+)", equation))) for equation in raw_input)
+    processed_input_2 = tuple(map(part_two_processor, raw_input))
 
 
 # Uses solving systems of linear equations via matrices
 # Puzzle input always has a non-zero determinant -> there's always 1 solution
 def solve_equation(coefficient_matrix, constant_matrix):
-    solution = coefficient_matrix.I * constant_matrix
+    solution = np.linalg.inv(coefficient_matrix) @ constant_matrix
 
     A, B = solution.item(0), solution.item(1)
 
@@ -41,8 +42,8 @@ def run(processed_input):
     answer = 0
     for line in processed_input:
         A_x, A_y, B_x, B_y, P_x, P_y = line
-        coefficient_matrix = np.matrix([[A_x, B_x], [A_y, B_y]])
-        constant_matrix = np.matrix([[P_x], [P_y]])
+        coefficient_matrix = np.array([[A_x, B_x], [A_y, B_y]])
+        constant_matrix = np.array([[P_x], [P_y]])
         answer += solve_equation(coefficient_matrix, constant_matrix)
     return answer
 
