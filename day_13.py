@@ -23,8 +23,9 @@ def solve_equation(coefficient_matrix, constant_matrix):
     A, B = solution.item(0), solution.item(1)
 
     # Floating point error correction
-    if np.abs(A - round(A)) < 0.0001 and np.abs(B - round(B)) < 0.0001:
-        return 3 * round(A) + round(B)
+    rounded_a, rounded_b = round(A), round(B)
+    if abs(A - rounded_a) < 0.0001 and abs(B - rounded_b) < 0.0001:
+        return 3 * rounded_a + rounded_b
     return 0
 
 
