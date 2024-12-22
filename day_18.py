@@ -36,14 +36,15 @@ def part_one(byte_count=1024):
 
 
 def part_two(start_byte=1024):
+    answer = start_byte
     corrupted = set()
     for x, y in puzzle_input[:start_byte]:
         corrupted.add((x, y))
     while True:
-        start_byte += 1
+        answer += 1
         current_positions = {(0, 0)}
         possible_positions, visited = set(), set()
-        corrupted.add(puzzle_input[start_byte])
+        corrupted.add(puzzle_input[answer])
         loop = True
         while loop:
             for position in current_positions:
@@ -60,8 +61,8 @@ def part_two(start_byte=1024):
             current_positions = possible_positions
             visited.update(possible_positions)
             if len(current_positions) == 0:
-                answer = puzzle_input[start_byte]
-                return f"{answer[1]},{answer[0]}"
+                output = puzzle_input[answer]
+                return f"{output[1]},{output[0]}"
             possible_positions = set()
 
 
